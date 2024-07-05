@@ -5,12 +5,13 @@ import org.junit.Test;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /*
 총 N개의 정수가 주어졌을 때, 정수 v가 몇 개인지 구하는 프로그램을 작성하시오.
 */
-public class Random {
+public class Array {
 
     @Test
     public void aMinusB() throws Exception{
@@ -81,6 +82,36 @@ public class Random {
          */
     }
 
+    /*
+    문제
+N개의 정수가 주어진다. 이때, 최솟값과 최댓값을 구하는 프로그램을 작성하시오.
+
+입력
+첫째 줄에 정수의 개수 N (1 ≤ N ≤ 1,000,000)이 주어진다. 둘째 줄에는 N개의 정수를 공백으로 구분해서 주어진다. 모든 정수는 -1,000,000보다 크거나 같고, 1,000,000보다 작거나 같은 정수이다.
+
+출력
+첫째 줄에 주어진 정수 N개의 최솟값과 최댓값을 공백으로 구분해 출력한다.
+     */
+    public static void minMax() throws Exception{
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        String input = br.readLine();
+
+        int number = Integer.parseInt(input);
+        Random rand = new Random();
+        List<Integer> list = new ArrayList<>();
+        for (int i = 0; i < number; i++) {
+            list.add(rand.nextInt(2000001) - 1000000);
+        }
+        list.stream().forEach(e -> System.out.print(e + " "));
+        System.out.println();
+
+        list.sort((o1, o2) -> o1.compareTo(o2));
+
+        System.out.print(list.get(0) + " " + list.get(list.size() - 1));
+
+    }
 }
 
 /*
