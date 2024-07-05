@@ -131,7 +131,7 @@ N개의 정수가 주어진다. 이때, 최솟값과 최댓값을 구하는 프�
 출력
 첫째 줄에 최댓값을 출력하고, 둘째 줄에 최댓값이 몇 번째 수인지를 출력한다.
      */
-    public static void maxAndPosition(){
+    public static void maxAndPosition() throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         List<Integer> list = new ArrayList<>();
