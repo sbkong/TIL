@@ -5,10 +5,7 @@ import org.junit.Test;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Random;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /*
@@ -171,11 +168,18 @@ N개의 정수가 주어진다. 이때, 최솟값과 최댓값을 구하는 프�
 
         String[] input = br.readLine().split(" ");
 
-        double sum = 0;
-        for (int i = 0; i < input.length; i++) {
-            sum += Integer.parseInt(input[i]);
+        List<Integer> list = new ArrayList<>();
+
+        Arrays.stream(input).forEach(x -> list.add(Integer.parseInt(x)));
+        list.sort(Collections.reverseOrder());
+
+        int max = list.getFirst();
+
+        double sum=0;
+        for (Integer integer : list) {
+            sum += (double) integer / max * 100;
         }
-        System.out.println(sum / count);
+        System.out.println(sum/list.size());
 
         br.close();
     }
