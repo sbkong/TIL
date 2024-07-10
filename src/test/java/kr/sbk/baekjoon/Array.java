@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 /*
 총 N개의 정수가 주어졌을 때, 정수 v가 몇 개인지 구하는 프로그램을 작성하시오.
@@ -235,6 +236,44 @@ https://www.acmicpc.net/problem/10811
         }
         list.forEach(e->System.out.print(e + " "));
         br.close();
+    }
+
+    /*
+    https://www.acmicpc.net/problem/3052
+    문제
+두 자연수 A와 B가 있을 때, A%B는 A를 B로 나눈 나머지 이다. 예를 들어, 7, 14, 27, 38을 3으로 나눈 나머지는 1, 2, 0, 2이다.
+
+수 10개를 입력받은 뒤, 이를 42로 나눈 나머지를 구한다. 그 다음 서로 다른 값이 몇 개 있는지 출력하는 프로그램을 작성하시오.
+
+입력
+첫째 줄부터 열번째 줄 까지 숫자가 한 줄에 하나씩 주어진다. 이 숫자는 1,000보다 작거나 같고, 음이 아닌 정수이다.
+
+출력
+첫째 줄에, 42로 나누었을 때, 서로 다른 나머지가 몇 개 있는지 출력한다.
+     */
+    public static void sameRemainder() throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        List<Integer> list = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            list.add(Integer.parseInt(br.readLine()) % 42);
+        }
+        List<Integer> result = list.stream().distinct().collect(Collectors.toList());
+//        List<Integer> result = list.stream().distinct().toList(); // Collection 을 왼쪽과 같이 간소화 가능
+
+//        Set<Integer> uniqueElements = new HashSet<>(); //Java 8 미만에서는 이렇게 중복 제거
+
+        /* 5
+        // 함수를 쓰지 않으려면 아래와 같이 작성
+        List<Integer> distinct = new ArrayList<>();
+        for (Integer element : list) {
+            if(distinct.contains(element)) distinct.add(element);
+        }
+        */
+
+//        result.forEach(e -> System.out.print(e + " "));
+//        System.out.println();
+        System.out.println(result.size());
     }
 }
 
