@@ -8,6 +8,7 @@ import java.io.InputStreamReader;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /*
 총 N개의 정수가 주어졌을 때, 정수 v가 몇 개인지 구하는 프로그램을 작성하시오.
@@ -309,6 +310,88 @@ X대학 M교수님은 프로그래밍 수업을 맡고 있다. 교실엔 학생�
         for(Integer student : originalStudentNumber) {
             if(!studentNumber.contains(student)) System.out.println(student);
         }
+
+/*      //이렇게도 가능할 듯
+        // originalStudentNumber에서 studentNumber에 포함된 번호들 제거
+        originalStudentNumber.removeAll(studentNumber);
+*/
+
+        /* //Stream 사용
+
+        Scanner scanner = new Scanner(System.in);
+
+        // 학생 번호 입력 받기
+        System.out.println("28명의 학생 번호를 입력하세요:");
+        List<Integer> studentNumbers = IntStream.range(0, 28)
+                                                .mapToObj(i -> scanner.nextInt())
+                                                .collect(Collectors.toList());
+
+        // 1부터 30까지의 번호를 originalStudentNumbers에 추가
+        List<Integer> originalStudentNumbers = IntStream.rangeClosed(1, 30)
+                                                       .boxed()
+                                                       .collect(Collectors.toList());
+
+        // studentNumbers에 포함되지 않은 번호들만 필터링하여 출력
+        System.out.println("결과:");
+        originalStudentNumbers.stream()
+                              .filter(num -> !studentNumbers.contains(num))
+                              .forEach(System.out::println);
+         */
+
+    }
+
+    /*
+    https://www.acmicpc.net/problem/10813
+    문제
+도현이는 바구니를 총 N개 가지고 있고, 각각의 바구니에는 1번부터 N번까지 번호가 매겨져 있다. 바구니에는 공이 1개씩 들어있고, 처음에는 바구니에 적혀있는 번호와 같은 번호가 적힌 공이 들어있다.
+
+도현이는 앞으로 M번 공을 바꾸려고 한다. 도현이는 공을 바꿀 바구니 2개를 선택하고, 두 바구니에 들어있는 공을 서로 교환한다.
+
+공을 어떻게 바꿀지가 주어졌을 때, M번 공을 바꾼 이후에 각 바구니에 어떤 공이 들어있는지 구하는 프로그램을 작성하시오.
+
+입력
+첫째 줄에 N (1 ≤ N ≤ 100)과 M (1 ≤ M ≤ 100)이 주어진다.
+
+둘째 줄부터 M개의 줄에 걸쳐서 공을 교환할 방법이 주어진다. 각 방법은 두 정수 i j로 이루어져 있으며, i번 바구니와 j번 바구니에 들어있는 공을 교환한다는 뜻이다. (1 ≤ i ≤ j ≤ N)
+
+도현이는 입력으로 주어진 순서대로 공을 교환한다.
+
+출력
+1번 바구니부터 N번 바구니에 들어있는 공의 번호를 공백으로 구분해 출력한다.
+     */
+    public static void swapBall(){
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        String[] strNM = br.readLine().split(" ");
+
+        int n = Integer.parseInt(strNM[0]);
+        int m = Integer.parseInt(strNM[1]);
+
+        List<Integer> basket = IntStream.range(1, n + 1).boxed().collect(Collectors.toList());
+
+        for (int i = 0; i < m; i++) {
+            String[] swapNumber = br.readLine().split(" ");
+
+            int first = Integer.parseInt(swapNumber[0]) - 1;
+            int second = Integer.parseInt(swapNumber[1]) - 1;
+
+            int tmp = basket.get(first);
+            basket.set(first, basket.get(second));
+            basket.set(second, tmp);
+
+            /*
+                int tmp = basket.get(first);
+                int tmp2 = basket.get(second);
+
+                basket.remove(first);
+                basket.add(first, tmp2);
+
+                basket.remove(second);
+                basket.add(second, tmp);
+             */
+        }
+        basket.forEach(e -> System.out.print(e + " "));
 
     }
 }
