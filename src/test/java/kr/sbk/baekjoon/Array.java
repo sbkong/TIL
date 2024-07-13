@@ -359,7 +359,7 @@ X대학 M교수님은 프로그래밍 수업을 맡고 있다. 교실엔 학생�
 출력
 1번 바구니부터 N번 바구니에 들어있는 공의 번호를 공백으로 구분해 출력한다.
      */
-    public static void swapBall(){
+    public static void swapBall() throws Exception{
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
@@ -414,7 +414,7 @@ X대학 M교수님은 프로그래밍 수업을 맡고 있다. 교실엔 학생�
 출력
 1번 바구니부터 N번 바구니에 들어있는 공의 번호를 공백으로 구분해 출력한다. 공이 들어있지 않은 바구니는 0을 출력한다.
      */
-    public static void inputBall(){
+    public static void inputBall() throws Exception{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         String[] init = br.readLine().split(" ");
