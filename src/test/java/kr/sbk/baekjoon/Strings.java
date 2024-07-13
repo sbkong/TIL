@@ -29,7 +29,7 @@ $1 \le i \le \left|S\right|$)
 $S$의
 $i$번째 글자를 출력한다.
      */
-    public void whichPosition() throws Exception{
+    public void whichPosition() throws Exception {
 
         try {
             String word = stringReadLine();
@@ -72,8 +72,25 @@ $i$번째 글자를 출력한다.
             char end = word.charAt(word.length() - 1);
 
             //char는 숫자처럼 연산되므로 조심
-            System.out.println(""+start+end);
+            System.out.println("" + start + end);
         }
+    }
+
+    public void sumEachOther() throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        int n = Integer.parseInt(br.readLine());
+        String c = br.readLine();
+
+        if (c.length() != n) System.exit(0);
+
+        String[] word = c.split("");
+        int sum = 0;
+        for (String w : word) {
+            sum += Integer.parseInt(w);
+        }
+
+        System.out.println(sum);
 
     }
 }
