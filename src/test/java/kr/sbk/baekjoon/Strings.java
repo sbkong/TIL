@@ -93,4 +93,41 @@ $i$번째 글자를 출력한다.
         System.out.println(sum);
 
     }
+
+    public void getPositionOfAlphabet() throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        char[] charArray = br.readLine().toCharArray();
+        for (char alphabet = 'a'; alphabet <= 'z'; alphabet++) {
+
+            int position = -1;
+            for (int i = 0; i < charArray.length; i++) {
+                if (charArray[i] == alphabet) {
+                    position = i;
+                    break;
+                }
+            }
+            System.out.print(position + " ");
+        }
+    }
+
+    public void repeatWords() throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        int n = Integer.parseInt(br.readLine());
+
+        for (int i = 0; i < n; i++) {
+            String[] str = br.readLine().split(" ");
+
+            int copyCnt = Integer.parseInt(str[0]);
+            char[] Alphabet = str[1].toCharArray();
+
+            for(char ap: Alphabet) {
+                for (int j = 0; j < copyCnt; j++) {
+                    System.out.print(ap);
+                }
+            }
+            System.out.println();
+        }
+    }
 }
