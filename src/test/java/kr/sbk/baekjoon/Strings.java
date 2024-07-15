@@ -130,4 +130,29 @@ $i$번째 글자를 출력한다.
             System.out.println();
         }
     }
+
+    public void repeatWords2() throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        int n = Integer.parseInt(br.readLine());
+
+        StringBuilder[] sb = new StringBuilder[n];
+        for (int i = 0; i < n; i++) {
+            sb[i] = new StringBuilder();
+            String[] str = br.readLine().split(" ");
+
+            int copyCnt = Integer.parseInt(str[0]);
+            char[] Alphabet = str[1].toCharArray();
+
+            for(char ap: Alphabet) {
+                for (int j = 0; j < copyCnt; j++) {
+                    sb[i].append(ap);
+                }
+            }
+        }
+
+        for(StringBuilder s : sb){
+            System.out.println(s);
+        }
+    }
 }
