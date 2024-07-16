@@ -3,6 +3,7 @@ package kr.sbk.baekjoon;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Strings {
@@ -122,7 +123,7 @@ $i$번째 글자를 출력한다.
             int copyCnt = Integer.parseInt(str[0]);
             char[] Alphabet = str[1].toCharArray();
 
-            for(char ap: Alphabet) {
+            for (char ap : Alphabet) {
                 for (int j = 0; j < copyCnt; j++) {
                     System.out.print(ap);
                 }
@@ -144,15 +145,55 @@ $i$번째 글자를 출력한다.
             int copyCnt = Integer.parseInt(str[0]);
             char[] Alphabet = str[1].toCharArray();
 
-            for(char ap: Alphabet) {
+            for (char ap : Alphabet) {
                 for (int j = 0; j < copyCnt; j++) {
                     sb[i].append(ap);
                 }
             }
         }
 
-        for(StringBuilder s : sb){
+        for (StringBuilder s : sb) {
             System.out.println(s);
         }
+    }
+
+    public void countWords() throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        String[] words = br.readLine().split(" ");
+
+
+        String[] nonEmptyWords = Arrays.stream(words).filter(word -> !"".equals(word)).toArray(String[]::new);
+
+        System.out.println(nonEmptyWords.length);
+
+    }
+
+    public void reverseWords() throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        String[] input = br.readLine().split(" ");
+
+        Integer[] numbers = new Integer[input.length];
+
+        int j = 0;
+        for (String number : input) {
+            char[] reverse = number.toCharArray();
+            String s = "";
+            for (int i = reverse.length - 1; i >= 0; i--) {
+                s += reverse[i];
+            }
+            numbers[j] = Integer.valueOf(s);
+            j++;
+        }
+
+        int max = numbers[0];
+        for (int i = 1; i < numbers.length; i++) {
+            if (max < numbers[i]) {
+                max = numbers[i];
+            }
+        }
+        System.out.println(max);
+
     }
 }
