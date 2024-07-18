@@ -1,5 +1,7 @@
 package kr.sbk.baekjoon;
 
+import org.junit.Test;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -169,6 +171,7 @@ $i$번째 글자를 출력한다.
 
     }
 
+    @Test
     public void reverseWords() throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
@@ -196,4 +199,6 @@ $i$번째 글자를 출력한다.
         System.out.println(max);
 
     }
+
+
 }
