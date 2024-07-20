@@ -225,4 +225,17 @@ $i$번째 글자를 출력한다.
 
     }
 
+    public static void printSameSentences() throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        List<String> sentences = new ArrayList<>();
+
+        String line;
+        while ((line = br.readLine()) != null && !line.isEmpty()) {
+            sentences.add(line);
+        }
+
+        sentences.forEach(System.out::println);
+    }
+
 }
