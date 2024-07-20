@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Strings {
     /*
@@ -200,7 +201,7 @@ $i$번째 글자를 출력한다.
 
     }
 
-    public void replaceDialWord() throws Exception{
+    public void replaceDialWord() throws Exception {
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
@@ -225,7 +226,7 @@ $i$번째 글자를 출력한다.
 
     }
 
-    public static void printSameSentences() throws Exception {
+    public void printSameSentences() throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         List<String> sentences = new ArrayList<>();
@@ -237,5 +238,6 @@ $i$번째 글자를 출력한다.
 
         sentences.forEach(System.out::println);
     }
+
 
 }
