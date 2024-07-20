@@ -200,5 +200,29 @@ $i$번째 글자를 출력한다.
 
     }
 
+    public void replaceDialWord() throws Exception{
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        int defaultTime = 3; // ABC = 2 를 입력하는데 드는 시간
+
+        char[] number = br.readLine().toCharArray();
+
+        List<Integer> numberList = new ArrayList<Integer>();
+        for (char c : number) {
+            if (c == 'Z') numberList.add((c - 65) / 3 - 1);
+            else if (c >= 'S') numberList.add((c - 66) / 3);
+            else numberList.add((c - 65) / 3);
+        }
+
+//        for (Integer i : numberList) {
+//            System.out.print(i + " ");
+//        }
+        int spentTime = 0;
+        spentTime = numberList.stream().mapToInt(n -> n + defaultTime).sum();
+
+        System.out.println(spentTime);
+
+    }
 
 }
