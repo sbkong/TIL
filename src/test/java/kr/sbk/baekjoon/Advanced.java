@@ -257,47 +257,4 @@ public class Advanced {
 
     }
 
-    public void twoDimensionMatrix() throws Exception {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
-        String[] input = br.readLine().split(" ");
-
-        int column = Integer.parseInt(input[0]);
-        int row = Integer.parseInt(input[1]);
-
-        List<Integer>[][] firstMatrix = new ArrayList[row][column];
-        List<Integer>[][] secondMatrix = new ArrayList[row][column];
-
-        for (int i = 0; i < row; i++) {
-            for (int j = 0; j < column; j++) {
-                firstMatrix[i][j] = new ArrayList<>();
-                secondMatrix[i][j] = new ArrayList<>();
-            }
-        }
-
-        // input value into matrix
-        for (int i = 0; i < row; i++) {
-            String[] rowInput = br.readLine().split(" ");
-
-            for (int j = 0; j < column; j++) {
-                firstMatrix[i][j].add(Integer.parseInt(rowInput[j]));
-            }
-        }
-
-        for (int i = 0; i < row; i++) {
-            String[] rowInput = br.readLine().split(" ");
-
-            for (int j = 0; j < column; j++) {
-                secondMatrix[i][j].add(Integer.parseInt(rowInput[j]));
-            }
-        }
-
-        for (int i = 0; i < row; i++) {
-            for (int j = 0; j < column; j++) {
-                int sum = firstMatrix[i][j].get(0) + secondMatrix[i][j].get(0);
-                System.out.print(sum + " ");
-            }
-            System.out.println();
-        }
-    }
 }
