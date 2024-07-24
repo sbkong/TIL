@@ -3,13 +3,17 @@ package kr.sbk.baekjoon;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
+/**
+ * The type Common math.
+ */
 public class CommonMath {
 
-    /***
+    /**
+     * Convert base.
+     * description https://www.acmicpc.net/problem/2745
      *
-     * @throws Exception
+     * @throws Exception the exception
      */
-
     public void convertBase() throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
