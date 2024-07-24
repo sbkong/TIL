@@ -1,5 +1,7 @@
 package kr.sbk.baekjoon;
 
+import org.junit.Test;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -153,6 +155,7 @@ public class TwoDimensionMatrix {
 
     // 흰 도화지를 기준으로 사각형의 공간을 1로 바꿨다.
     // 1로 바꾼 행렬의 값을 모두 더하면 곧 넓이가 된다.
+    @Test
     public void calcArea2() throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int[][] paper = new int[100][100];
