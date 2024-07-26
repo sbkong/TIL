@@ -1,6 +1,7 @@
 package kr.sbk.baekjoon;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 
 /**
@@ -52,6 +53,7 @@ public class CommonMath {
     /**
      * Convert base n.
      * description https://www.acmicpc.net/problem/11005
+     *
      * @throws Exception the exception
      */
     public void convertBaseN() throws Exception {
@@ -77,5 +79,30 @@ public class CommonMath {
 
         System.out.println(convertNumber.reverse());
 
+    }
+
+    /**
+     * Calc changes.
+     * 잔돈 계산기
+     */
+    public void calcChanges() {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        try {
+            int cases = Integer.parseInt(br.readLine().trim());
+
+            int[] unit = {25, 10, 5, 1};
+            while (cases-- > 0) {
+                int money = Integer.parseInt(br.readLine().trim());
+
+                for (int i = 0; i < unit.length; i++) {
+                    System.out.print((money / unit[i]) + " ");
+                    money = money % unit[i];
+                }
+                System.out.println();
+            }
+        } catch (IOException | NumberFormatException e) {
+            System.err.println("Invalid input: " + e.getMessage());
+        }
     }
 }
