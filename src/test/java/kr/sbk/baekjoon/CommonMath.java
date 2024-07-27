@@ -105,4 +105,52 @@ public class CommonMath {
             System.err.println("Invalid input: " + e.getMessage());
         }
     }
+
+
+    /**
+     * Calc add points of rectangle.
+     * description https://www.acmicpc.net/problem/2903
+     */
+    public void calcAddPointsOfRectangle() {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        try {
+            int level = Integer.parseInt(br.readLine().trim());
+
+            int pointCount = calcSquare(2, level) + 1;
+            pointCount = calcSquare(pointCount, 2);
+
+            System.out.println(pointCount);
+
+        } catch (IOException | NumberFormatException e) {
+            System.err.println("Invalid input: " + e.getMessage());
+        }
+    }
+
+    private int calcSquare(int n, int times) {
+        int result = 1;
+        for (int i = 1; i <= times; i++) {
+            result *= n;
+        }
+        return result;
+    }
+
+    /**
+     * Calc add points of rectangle 2.
+     * description Math.pow를 활용해서 더 간단하게 할 수 있다.
+     */
+    public void calcAddPointsOfRectangle2() {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        try {
+            int level = Integer.parseInt(br.readLine().trim());
+
+            int pointCount = (int) Math.pow(Math.pow(2, level) + 1, 2);
+
+            System.out.println(pointCount);
+
+        } catch (IOException | NumberFormatException e) {
+            System.err.println("Invalid input: " + e.getMessage());
+        }
+    }
 }
