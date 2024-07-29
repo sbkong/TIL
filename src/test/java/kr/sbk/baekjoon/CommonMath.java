@@ -153,4 +153,64 @@ public class CommonMath {
             System.err.println("Invalid input: " + e.getMessage());
         }
     }
+
+    /**
+     * Hoeny bee house.
+     * https://www.acmicpc.net/problem/2292
+     */
+    public void hoenyBeeHouse() {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        try {
+            int target = Integer.parseInt(br.readLine());
+
+            if (target == 1) {
+                System.out.println(1);
+                return;
+            }
+            int octagonRangeBySteps = 1;
+            int step = 1;
+            for (int i = 1; ; i++) {
+                octagonRangeBySteps += 6 * i;
+                if (octagonRangeBySteps >= target) {
+                    step = step + i;
+                    break;
+                }
+            }
+            System.out.println(step);
+
+        } catch (IOException | NumberFormatException e) {
+            System.out.println(e.getMessage());
+        }
+
+    }
+
+    /**
+     * Honey bee house 2.
+     */
+    public void honeyBeeHouse2 () {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        try {
+            int target = Integer.parseInt(br.readLine());
+
+            if (target == 1) {
+                System.out.println(1);
+                return;
+            }
+
+            int octagonRangeBySteps = 1;
+            int step = 1;
+
+            while (octagonRangeBySteps < target) {
+                octagonRangeBySteps += 6 * step;
+                step++;
+            }
+
+            System.out.println(step);
+
+        } catch (IOException | NumberFormatException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 }
