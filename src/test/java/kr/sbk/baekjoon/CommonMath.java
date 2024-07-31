@@ -313,4 +313,74 @@ public class CommonMath {
             System.out.println(e.getMessage());
         }
     }
+
+
+    /**
+     * Snails claiming.
+     * https://www.acmicpc.net/problem/2869
+     * 목표 : 지연시간 250ms 이하
+     * 아래 코드는 지연시간 약 500ms
+     */
+    public void snailsClaiming(){
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        long startTime = 0;
+        try {
+            String[] input = br.readLine().split(" ");
+
+            startTime = System.currentTimeMillis();
+            int goal = Integer.parseInt(input[2]);
+
+            int step = 0;
+            int stepForward = Integer.parseInt(input[0]);
+            int stepBackward = Integer.parseInt(input[1]);
+            int day = 0;
+
+            while (step < goal) {
+                day++;
+                step += stepForward;
+                if (step >= goal) {
+                    break;
+                }
+                step -= stepBackward;
+            }
+            System.out.println(day);
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        long endTime = System.currentTimeMillis();
+        long elapsedTime = endTime - startTime;
+        System.out.println("소요 시간: " + elapsedTime + " 밀리초");
+    }
+
+    /**
+     * Snails claiming 2.
+     *
+     * 달팽이가 하루 동안 올라가는 순수한 높이는 A - B
+     * 목표 높이 V에서 마지막 날 밤에 미끄러지는 높이 B를 뺀  V− B를 계산
+     * 이를 하루 동안 올라가는 순수한 높이 A−B로 나누어 며칠이 걸리는지를 계산
+     * 나머지가 있으면 하루를 더 추가
+     */
+    public void snailsClaiming2(){
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        try {
+            String[] input = br.readLine().split(" ");
+            int A = Integer.parseInt(input[0]);
+            int B = Integer.parseInt(input[1]);
+            int V = Integer.parseInt(input[2]);
+
+            // (V - B) 높이까지 도달하는데 걸리는 일수를 계산
+            int days = (V - B) / (A - B);
+
+            // 나머지가 있을 경우 하루를 추가
+            if ((V - B) % (A - B) != 0) {
+                days++;
+            }
+
+            System.out.println(days);
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 }
