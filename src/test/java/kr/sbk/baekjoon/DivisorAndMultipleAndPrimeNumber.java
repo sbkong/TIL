@@ -3,6 +3,8 @@ package kr.sbk.baekjoon;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The type Devisor and multiple and prime number.
@@ -12,7 +14,6 @@ public class DivisorAndMultipleAndPrimeNumber {
     /**
      * Divisor and multiplier.
      * <a href="https://www.acmicpc.net/problem/5086">...</a>
-     *
      */
     public void divisorAndMultiplier() {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -37,6 +38,35 @@ public class DivisorAndMultipleAndPrimeNumber {
             System.out.println(e.getMessage());
         } catch (NumberFormatException e) {
             System.out.println("Please enter a number");
+        }
+    }
+
+    /**
+     * Gets divisor by n.
+     *
+     * https://www.acmicpc.net/problem/2501
+     */
+    public void getDivisorByN() {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        try {
+            String[] input = br.readLine().split(" ");
+
+            int number = Integer.parseInt(input[0]);
+            int n = Integer.parseInt(input[1]);
+            List<Integer> divisor = new ArrayList<Integer>();
+
+            for (int i = 1; i <= number; i++) {
+                if (number % i == 0) {
+                    divisor.add(i);
+                }
+            }
+
+            if (n <= divisor.size())  System.out.println(divisor.get(n-1));
+            else System.out.println(0);
+
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
     }
 }
