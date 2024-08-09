@@ -131,4 +131,89 @@ public class DivisorAndMultipleAndPrimeNumber {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Prime number in range.
+     * <a href="https://www.acmicpc.net/problem/2581">...</a>
+     *
+     * @description 2부터 X-1까지 모두 나눠서 X가 소수인지 판별하는 문제 2
+     */
+    public void primeNumberInRange() {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        try {
+            int m = Integer.parseInt(br.readLine());
+            int n = Integer.parseInt(br.readLine());
+
+            List<Integer> divisors = new ArrayList<Integer>();
+
+            for (int i = m; i <= n; i++) {
+
+                int cnt = 0;
+                for (int j = 2; j <= i; j++) {
+                    if (i % j == 0) {
+                        cnt++;
+                    }
+                }
+                if (cnt < 2 && i != 1) divisors.add(i);
+            }
+            if (divisors.isEmpty()) {
+                System.out.println(-1);
+                return;
+            }
+            System.out.println(divisors.stream().mapToInt(e -> e).sum());
+            System.out.println(divisors.get(0));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Prime number in range 2.
+     * <p>
+     * 에라토스테네스의 체 공식을 사용하면 쉽게 구할 수 있다.
+     */
+    public void primeNumberInRange2() {
+        try {
+            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+            int M = Integer.parseInt(br.readLine());
+            int N = Integer.parseInt(br.readLine());
+
+            boolean[] isPrime = new boolean[N + 1];
+            for (int i = 2; i <= N; i++) {
+                isPrime[i] = true;
+            }
+
+            for (int i = 2; i * i <= N; i++) {
+                if (isPrime[i]) {
+                    for (int j = i * i; j <= N; j += i) {
+                        isPrime[j] = false;
+                    }
+                }
+            }
+
+            List<Integer> primes = new ArrayList<>();
+            for (int i = M; i <= N; i++) {
+                if (isPrime[i]) {
+                    primes.add(i);
+                }
+            }
+
+            if (primes.isEmpty()) {
+                System.out.println(-1);
+            } else {
+                int sum = primes.stream().mapToInt(Integer::intValue).sum();
+                int min = primes.get(0);
+                System.out.println(sum);
+                System.out.println(min);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void factorizationInPrimeFactors() {
+
+    }
 }
