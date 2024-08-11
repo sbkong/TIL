@@ -235,7 +235,7 @@ public class DivisorAndMultipleAndPrimeNumber {
                     e -> {
                         while (n.get() % e == 0) {
                             System.out.println(e);
-                            n /= v / e;
+                            n.updateAndGet(v -> v / e);
                         }
                     }
             );
