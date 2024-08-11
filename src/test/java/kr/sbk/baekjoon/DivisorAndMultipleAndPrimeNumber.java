@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 /**
@@ -213,7 +214,60 @@ public class DivisorAndMultipleAndPrimeNumber {
         }
     }
 
-    public void factorizationInPrimeFactors() {
 
+    /**
+     * N을 소인수분해하는 문제 with AtomicInteger
+     */
+    static void factorizationInPrimeFactors() {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        try {
+            AtomicInteger n = new AtomicInteger(Integer.parseInt(br.readLine()));
+
+            // 정수 n의 소수 찾기
+            List<Integer> primeNumbers = new ArrayList<>();
+            for (int i = 2; i <= n.get(); i++) {
+                if (n.get() % i == 0) {
+                    primeNumbers.add(i);
+                }
+            }
+
+            primeNumbers.forEach(
+                    e -> {
+                        while (n.get() % e == 0) {
+                            System.out.println(e);
+                            n /= v / e;
+                        }
+                    }
+            );
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * N을 소인수분해하는 문제
+     */
+    static void factorizationInPrimeFactors2() {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        try {
+            int n = Integer.parseInt(br.readLine());
+
+            // 정수 n의 소수 찾기
+            List<Integer> primeNumbers = new ArrayList<>();
+            for (int i = 2; i <= n; i++) {
+                if (n % i == 0) {
+                    primeNumbers.add(i);
+                }
+            }
+
+            for (int i = 0; i < primeNumbers.size(); i++) {
+                while (n % primeNumbers.get(i) == 0) {
+                    System.out.println(primeNumbers.get(i));
+                    n /= primeNumbers.get(i);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
