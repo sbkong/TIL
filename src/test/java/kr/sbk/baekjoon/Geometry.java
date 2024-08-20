@@ -1,7 +1,10 @@
 package kr.sbk.baekjoon;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -83,6 +86,37 @@ public class Geometry {
             System.out.println(x4 + " " + y4);
 
             sc.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void whereIsTheLastPoint2() {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
+
+            List<Integer> pointsX = new ArrayList<>();
+            List<Integer> pointsY = new ArrayList<>();
+            for (int i = 0; i < 3; i++) {
+                String[] givenPoint = br.readLine().split(" ");
+                pointsX.add(Integer.parseInt(givenPoint[0]));
+                pointsY.add(Integer.parseInt(givenPoint[1]));
+            }
+
+            int remainderPointX = pointsX.get(0);
+            int remainderPointY = pointsY.get(0);
+
+            if(remainderPointX == pointsX.get(1))
+                remainderPointX = pointsX.get(2);
+            else if(remainderPointX == pointsX.get(2))
+                remainderPointX = pointsX.get(1);
+
+            if(remainderPointY == pointsY.get(1))
+                remainderPointY = pointsY.get(2);
+            else if(remainderPointY == pointsY.get(2))
+                remainderPointY = pointsY.get(1);
+
+            System.out.println(remainderPointX + " " + remainderPointY);
 
         } catch (Exception e) {
             e.printStackTrace();
