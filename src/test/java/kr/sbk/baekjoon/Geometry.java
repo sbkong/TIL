@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -92,6 +93,9 @@ public class Geometry {
         }
     }
 
+    /**
+     * Where is the last point 2.
+     */
     public void whereIsTheLastPoint2() {
         try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
 
@@ -118,6 +122,68 @@ public class Geometry {
 
             System.out.println(remainderPointX + " " + remainderPointY);
 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    /**
+     * Gets perimeter.
+     * <a href="https://www.acmicpc.net/problem/15894">...</a>
+     */
+    public void getPerimeter() {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
+
+            long n = Long.parseLong(br.readLine());
+
+            System.out.println(n * 3 + n);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    /**
+     * 내 땅 구하기
+     * <a href="https://www.acmicpc.net/problem/9063">...</a>
+     */
+    static public void calcMyLand() {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
+
+            int n = Integer.parseInt(br.readLine());
+
+            int minX = 10001;
+            int maxX = -10001;
+            int minY = 10001;
+            int maxY = -10001;
+
+            int area = 0;
+
+            for (int i = 1; i <= n; i++) {
+                int[] x = Arrays.stream(br.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
+
+                if (n == 1) break;
+
+                if (minX > x[0]) {
+                    minX = x[0];
+                }
+                if (maxX < x[0]) {
+                    maxX = x[0];
+                }
+                if (minY > x[1]) {
+                    minY = x[1];
+                }
+                if (maxY < x[1]) {
+                    maxY = x[1];
+                }
+
+                if (i == n && (minX == maxX || minY == maxY)) break;
+
+                area = (maxX - minX) * (maxY - minY);
+            }
+
+            System.out.println(area);
         } catch (Exception e) {
             e.printStackTrace();
         }
