@@ -1,7 +1,6 @@
 package kr.sbk.baekjoon;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -216,6 +215,61 @@ public class Geometry {
 
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+
+    /**
+     * Gets triangle shape v 2.
+     * <a href="https://www.acmicpc.net/problem/5073">...</a>
+     */
+    static public void getTriangleShapeV2() {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
+
+            int[] angles;
+            while (true) {
+                angles = Arrays.stream(br.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
+                Arrays.sort(angles);
+
+                if (angles[0] == 0 && angles[1] == 0 && angles[2] == 0)
+                    break;
+
+                if (angles[0] + angles[1] > angles[2]) {
+                    if (angles[0] == angles[1] && angles[0] == angles[2])
+                        System.out.println("Equilateral");
+                    else if (angles[0] == angles[1] || angles[0] == angles[2] || angles[1] == angles[2])
+                        System.out.println("Isosceles");
+                    else
+                        System.out.println("Scalene");
+                } else {
+                    System.out.println("Invalid");
+                }
+            }
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+    /**
+     * Calc maximum triangle perimeter.
+     * <a href="https://www.acmicpc.net/problem/14215">...</a>
+     */
+    static public void calcMaximumTrianglePerimeter() {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
+
+            int[] angles;
+            angles = Arrays.stream(br.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
+            Arrays.sort(angles);
+
+            if (angles[0] + angles[1] <= angles[2]) {
+                angles[2] = angles[0] + angles[1] - 1;
+            }
+            System.out.println(Arrays.stream(angles).sum());
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 }
