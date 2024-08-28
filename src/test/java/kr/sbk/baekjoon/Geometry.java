@@ -188,4 +188,34 @@ public class Geometry {
             e.printStackTrace();
         }
     }
+
+
+    /**
+     * Gets triangle shape.
+     * <a href="https://www.acmicpc.net/problem/10101">...</a>
+     */
+    public void getTriangleShape() {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
+
+            int[] angles = new int[3];
+            int sumAngle = 0;
+
+            for (int i = 0; i < angles.length; i++) {
+                angles[i] = Integer.parseInt(br.readLine());
+                sumAngle += angles[i];
+            }
+
+            if (sumAngle != 180)
+                System.out.println("Error");
+            else if (angles[0] == 60 && angles[1] == 60 && angles[2] == 60)
+                System.out.println("Equilateral");
+            else if (angles[0] == angles[1] || angles[0] == angles[2] || angles[1] == angles[2])
+                System.out.println("Isosceles");
+            else
+                System.out.println("Scalene");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
