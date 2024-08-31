@@ -96,7 +96,7 @@ public class TimeComplexity {
      * <p>
      * 이건 수행 횟수가 n^2
      * O(n^2) 차수는 2
-     *
+     * <p>
      * 50만*50만이 2500억 이므로 Long을 써야 한다.
      * (int는 -2147483648 ~ 21억 4748만 3647)
      */
@@ -113,5 +113,31 @@ public class TimeComplexity {
         }
     }
 
+    /**
+     * Time complexity 4.
+     * <p>
+     * MenOfPassion(A[], n) {
+     * sum <- 0;
+     * for i <- 1 to n - 1
+     * for j <- i + 1 to n
+     * sum <- sum + A[i] × A[j]; # 코드1
+     * return sum;
+     * }
+     * <p>
+     * 수식은 n * (n-1) / 2
+     * 차수는 n^2 = 2
+     */
+    public static void timeComplexity4() {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
+
+            long n = Long.parseLong(br.readLine());
+
+            System.out.println(n * (n - 1) / 2);
+            System.out.println(2);
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 }
