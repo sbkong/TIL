@@ -140,4 +140,60 @@ public class TimeComplexity {
         }
     }
 
+    /**
+     * Time complexity 5.
+     * <p>
+     * MenOfPassion(A[], n) {
+     * sum <- 0;
+     * for i <- 1 to n
+     * for j <- 1 to n
+     * for k <- 1 to n
+     * sum <- sum + A[i] × A[j] × A[k]; # 코드1
+     * return sum;
+     * }
+     * <p>
+     * 수식 n*n*n
+     * 차수 3
+     */
+    public void timeComplexity5() {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
+
+            long n = Long.parseLong(br.readLine());
+
+            System.out.println(n * n * n);
+            System.out.println(3);
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * Time complexity 6.
+     *
+     * MenOfPassion(A[], n) {
+     *     sum <- 0;
+     *     for i <- 1 to n - 2
+     *         for j <- i + 1 to n - 1
+     *             for k <- j + 1 to n
+     *                 sum <- sum + A[i] × A[j] × A[k]; # 코드1
+     *     return sum;
+     * }
+     *
+     * 이건 어렵다... 다시 보자
+     */
+    public static void timeComplexity6() {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
+
+            long n = Long.parseLong(br.readLine());
+
+            if (n < 3) System.out.println(0);
+            else System.out.println((long) n * (n - 1) * (n - 2) / 6);
+
+            System.out.println(3);
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

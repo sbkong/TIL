@@ -1,18 +1,30 @@
 package kr.sbk;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 
 public class Main {
-
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
     public static void main(String[] args) {
-        Elevator ev1 = new Elevator("EV1");
-        Elevator ev2 = new Elevator("EV2");
-        Elevator ev3 = new Elevator("EV3");
+        timeComplexity5();
+    }
 
-        ev1.start();
-        ev2.start();
-        ev3.start();
+    public static void timeComplexity5() {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
 
-        
+            long n = Long.parseLong(br.readLine());
+
+            if (n < 3) System.out.println(0);
+            else System.out.println((long) n * (n - 1) * (n - 2) / 6);
+
+            System.out.println(3);
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }
