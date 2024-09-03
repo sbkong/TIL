@@ -170,16 +170,16 @@ public class TimeComplexity {
 
     /**
      * Time complexity 6.
-     *
+     * <p>
      * MenOfPassion(A[], n) {
-     *     sum <- 0;
-     *     for i <- 1 to n - 2
-     *         for j <- i + 1 to n - 1
-     *             for k <- j + 1 to n
-     *                 sum <- sum + A[i] × A[j] × A[k]; # 코드1
-     *     return sum;
+     * sum <- 0;
+     * for i <- 1 to n - 2
+     * for j <- i + 1 to n - 1
+     * for k <- j + 1 to n
+     * sum <- sum + A[i] × A[j] × A[k]; # 코드1
+     * return sum;
      * }
-     *
+     * <p>
      * 이건 어렵다... 다시 보자
      */
     public static void timeComplexity6() {
@@ -191,6 +191,30 @@ public class TimeComplexity {
             else System.out.println((long) n * (n - 1) * (n - 2) / 6);
 
             System.out.println(3);
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * asymptoticNotation.
+     * <a href="https://en.wikipedia.org/wiki/Big_O_notation">...</a>
+     *
+     * 뭔 말인지 모르겠지만 이해할 것이다.
+     */
+    public void asymptoticNotation() {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
+
+            String[] input = br.readLine().split(" ");
+
+            int a1 = Integer.parseInt(input[0]);
+            int a0 = Integer.parseInt(input[1]);
+            int c = Integer.parseInt(br.readLine());
+            int n0 = Integer.parseInt(br.readLine());
+
+            if (c >= a1 && (a1 - c) * n0 + a0 <= 0) System.out.println(1);
+            else System.out.println(0);
 
         } catch (Exception e) {
             throw new RuntimeException(e);
