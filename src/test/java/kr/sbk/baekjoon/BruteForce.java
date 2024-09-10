@@ -14,7 +14,7 @@ public class BruteForce {
     /**
      * Black jack.
      * <a href="https://www.acmicpc.net/problem/2798">...</a>
-     *
+     * <p>
      * 시간 복잡도는 O(n^3) : 대략 최대 100만 번 연산, 3Ghz 컴퓨터로 0.0033초
      * 물론 실제로는 여러가지 이유로 이것보다 오래 걸리겠지
      */
@@ -43,6 +43,33 @@ public class BruteForce {
             }
 
             System.out.println(maxSum);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+    /**
+     * 분해 합.
+     * <a href="https://www.acmicpc.net/problem/2231">...</a>
+     */
+    public void disassembledSum() {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
+
+            String n = br.readLine();
+
+            int disassembledSum = Integer.parseInt(n);
+
+            for (int i = 0; i < disassembledSum; i++) {
+                if (disassembledSum == i + Arrays.stream(String.valueOf(i).split("")).mapToInt(Integer::parseInt).sum()) {
+                    System.out.println(i);
+                    break;
+                } else if (i == disassembledSum - 1) {
+                    System.out.println(0);
+                }
+            }
+
+
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
