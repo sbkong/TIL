@@ -1,6 +1,7 @@
 package kr.sbk.baekjoon;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.List;
@@ -79,7 +80,7 @@ public class BruteForce {
     * 연립방정식 해 구하기
     * https://www.acmicpc.net/problem/19532
     */
-    public void simultaneousEquation(){
+    public void simultaneousEquation() throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String[] input = br.readLine().split(" ");
 
