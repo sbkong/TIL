@@ -109,6 +109,7 @@ public class BruteForce {
     public static void getRefillCellCount() {
         try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
 
+
             // N: 세로 크기, M: 가로 크기
             String[] size = br.readLine().split(" ");
             int N = Integer.parseInt(size[0]);
