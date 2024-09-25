@@ -159,4 +159,63 @@ public class BruteForce {
 
         return Math.min(count1, count2); // 두 패턴 중 더 적은 칠하기 횟수 반환
     }
+
+
+    /**
+     * <a href="https://www.acmicpc.net/problem/1436">...</a>
+     *
+     * 아래 주석된 코드와 같이 문자열을 잘라서 계산하면 메모리를 많이 사용한다.
+     *
+     * series=10000 일 때,
+     * String.split() 사용 : 320MB
+     * int 사용 : 0 byte
+     */
+    public void satanSeries() {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
+            int series = Integer.parseInt(br.readLine());
+
+            int seriesNumber = 0;
+            int seriesCount = 0;
+            for (int i = 666; i < Integer.MAX_VALUE; i++) {
+                if (seriesCount == series) {
+                    break;
+                }
+                int temp = i;
+                int count = 0;
+
+                while (temp > 0) {
+                    if (temp % 10 == 6) {
+                        count++;
+                    } else {
+                        count = 0;
+                    }
+                    if (count == 3) {
+                        seriesCount++;
+                        seriesNumber = i;
+                        break;
+                    }
+                    temp /= 10;
+                }
+
+                /*String[] separated = String.valueOf(i).split("");
+                for (int j = 0; j < separated.length; j++) {
+                    int n = Integer.parseInt(separated[j]);
+                    if (n == 6 && j + 1 < separated.length && j + 2 < separated.length) {
+                        int m = Integer.parseInt(separated[j + 1]);
+                        int o = Integer.parseInt(separated[j + 2]);
+
+                        if (m == 6 && o == 6) {
+                            seriesNumber = i;
+                            seriesCount++;
+                            break;
+                        }
+                    }
+                }*/
+            }
+            System.out.println(seriesNumber);
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
