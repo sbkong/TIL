@@ -218,4 +218,30 @@ public class BruteForce {
             throw new RuntimeException(e);
         }
     }
+
+    /**
+     * <a href="https://www.acmicpc.net/problem/2839">...</a>
+     */
+    public static void delivery() {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
+            int weight = Integer.parseInt(br.readLine());
+
+            int five = 5;
+            int three = 3;
+
+            int min = Integer.MAX_VALUE;
+
+            for (int i = 0; i <= weight / five; i++) {
+                int remainder = weight - (five * i);
+
+                if (remainder % three == 0) {
+                    min = Math.min(min, remainder / three + i);
+                }
+            }
+
+            System.out.println(min == Integer.MAX_VALUE ? -1 : min);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
