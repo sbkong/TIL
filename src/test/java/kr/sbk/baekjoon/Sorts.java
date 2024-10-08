@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -110,4 +111,61 @@ public class Sorts {
         }
     }
 
+
+    /**
+     * <a href="https://www.acmicpc.net/problem/2751">...</a>
+     * 출력 부분의 시간 초과가 영향이 컸다.
+     * 그리고 정렬은 Collections 클래스를 사용하면 빠르다.
+     *
+     * O(n^2) 대신 O(log(n))을 사용하는 정렬 기법을 사용해야 한다.
+     *
+     * <p> 참고 </p>
+     * <a href="https://www.acmicpc.net/board/view/149136">...</a>
+     * <a href="https://www.acmicpc.net/board/view/31887">...</a>
+     *<a href="https://codeforces.com/blog/entry/7108">...</a>
+     *
+     */
+    public static void sortSmallToLargeTwo() {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
+            List<Integer> numbers = new ArrayList<>();
+            int numberCount = Integer.parseInt(br.readLine());
+
+            while (numberCount > 0) {
+                numbers.add(Integer.parseInt(br.readLine()));
+                numberCount--;
+            }
+//            numbers.sort(Integer::compareTo); // 178.7896 ms
+            Collections.sort(numbers); // 7.0679 ms
+
+//            numbers.forEach(System.out::println); // 4222 ms
+
+            StringBuilder sb = new StringBuilder();
+
+            numbers.forEach(e -> sb.append(e).append("\n")); // 19.2457 ms
+            System.out.println(sb);
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * <a href="https://www.acmicpc.net/problem/2751">...</a>
+     */
+    public static void sortSmallToLargeTwo2() {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
+            int numberCount = Integer.parseInt(br.readLine());
+
+            int[] numbers = new int[numberCount];
+
+            for (int i = 0; i < numberCount; i++) {
+                numbers[i] = Integer.parseInt(br.readLine());
+            }
+            Arrays.parallelSort(numbers); // 260.793 ms
+
+            Arrays.stream(numbers).forEach(System.out::println); // 4222 ms
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
