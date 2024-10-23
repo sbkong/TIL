@@ -124,6 +124,7 @@ public class Sorts {
      * <a href="https://www.acmicpc.net/board/view/31887">...</a>
      *<a href="https://codeforces.com/blog/entry/7108">...</a>
      *
+     * @param <ex>  the type parameter
      */
     public static <ex> void sortSmallToLargeTwo() {
         try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
@@ -170,6 +171,23 @@ public class Sorts {
             Arrays.parallelSort(numbers); // 260.793 ms
 
             Arrays.stream(numbers).forEach(System.out::println); // 4222 ms
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * <a href="https://www.acmicpc.net/problem/1427">...</a>
+     */
+    public static void sortDesc() {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
+            List<Integer> splitNumber = Arrays.stream(br.readLine().split(""))
+                .map(Integer::parseInt).collect(Collectors.toList());
+
+            splitNumber.sort((o1, o2) -> o2 - o1);
+
+            splitNumber.forEach(System.out::print);
+
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
