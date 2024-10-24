@@ -124,7 +124,7 @@ public class Sorts {
      * <a href="https://www.acmicpc.net/board/view/31887">...</a>
      *<a href="https://codeforces.com/blog/entry/7108">...</a>
      *
-     * @param <ex>  the type parameter
+     * @param <ex>   the type parameter
      */
     public static <ex> void sortSmallToLargeTwo() {
         try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
@@ -188,6 +188,37 @@ public class Sorts {
 
             splitNumber.forEach(System.out::print);
 
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * O(logN) 정렬 알고리즘을 사용해야함
+     * <a href="https://www.acmicpc.net/problem/11650">...</a>
+     */
+    public static void sortOLogN() {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
+            int count = Integer.parseInt(br.readLine());
+
+            List<int[]> points = new ArrayList<>();
+            for (int i = 0; i < count; i++) {
+                String[] input = br.readLine().split(" ");
+                points.add(new int[]{Integer.parseInt(input[0]), Integer.parseInt(input[1])});
+            }
+
+            points.sort((a, b) -> {
+                if (b[0] != a[0]) {
+                    return Integer.compare(a[0], b[0]);
+                } else {
+                    if (b[1] != a[1]) {
+                        return Integer.compare(a[1], b[1]);
+                    }
+                }
+                return 0;
+            });
+
+            points.forEach(p -> System.out.println(p[0] + " " + p[1]));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
