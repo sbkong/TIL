@@ -7,8 +7,10 @@ import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -126,7 +128,7 @@ public class Sorts {
      * <a href="https://www.acmicpc.net/board/view/31887">...</a>
      *<a href="https://codeforces.com/blog/entry/7108">...</a>
      *
-     * @param <ex>    the type parameter
+     * @param <ex>      the type parameter
      */
     public static <ex> void sortSmallToLargeTwo() {
         try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
@@ -300,6 +302,108 @@ public class Sorts {
             return true;
         } catch (NumberFormatException e) {
             return false;
+        }
+    }
+
+    /**
+     * <a href="https://www.acmicpc.net/problem/10814">...</a>
+     */
+    public static void sortAgeAndName() {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
+            int count = Integer.parseInt(br.readLine());
+
+            List<Map<Integer, String>> users = new ArrayList<>();
+            for (int i = 0; i < count; i++) {
+                String[] input = br.readLine().split(" ");
+
+                /* 전통적인 방법 */
+//                Map<Integer, String> user = new HashMap<>();
+//                user.put(Integer.parseInt(input[0]), input[1]);
+//                users.add(user);
+
+                /* 한 줄로 삽입 */
+                users.add(Collections.singletonMap(Integer.parseInt(input[0]), input[1]));
+            }
+
+            /* users의 input[0]끼리 비교 정렬, 값이 같으면 그냥 유지*/
+            users.sort((u1, u2) -> {
+                Integer age1 = u1.keySet().iterator().next();
+                Integer age2 = u2.keySet().iterator().next();
+
+                /* 이름 정렬도 필요할 경우*/
+//                String name1 = u1.values().iterator().next();
+//                String name2 = u2.values().iterator().next();
+
+                int ageComparison = age1.compareTo(age2);
+//                if (ageComparison != 0) {
+                return ageComparison;
+//                }
+//                return name1.compareTo(name2);
+//                return 0;
+            });
+
+            users.forEach(user -> {
+                Integer age = user.keySet().iterator().next();
+                String name = user.values().iterator().next();
+                System.out.println(age + " " + name);
+            });
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+    /**
+     * The type User.
+     */
+    static class User {
+
+        /**
+         * The Age.
+         */
+        int age;
+        /**
+         * The Name.
+         */
+        String name;
+
+        /**
+         * Instantiates a new User.
+         *
+         * @param age the age
+         * @param name the name
+         */
+        User(int age, String name) {
+            this.age = age;
+            this.name = name;
+        }
+
+        @Override
+        public String toString() {
+            return age + " " + name;
+        }
+    }
+
+    /**
+     * Sort age and name 2.
+     */
+    public static void sortAgeAndName2() {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
+            int count = Integer.parseInt(br.readLine());
+
+            List<User> users = new ArrayList<>();
+            for (int i = 0; i < count; i++) {
+                String[] input = br.readLine().split(" ");
+                users.add(new User(Integer.parseInt(input[0]), input[1]));
+            }
+
+            /* 나이로 정렬, 나이가 같으면 이름으로 정렬 */
+            users.sort(Comparator.comparingInt((User u) -> u.age).thenComparing(u -> u.name));
+
+            users.forEach(System.out::println);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 }
