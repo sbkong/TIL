@@ -128,7 +128,7 @@ public class Sorts {
      * <a href="https://www.acmicpc.net/board/view/31887">...</a>
      *<a href="https://codeforces.com/blog/entry/7108">...</a>
      *
-     * @param <ex>      the type parameter
+     * @param <ex>       the type parameter
      */
     public static <ex> void sortSmallToLargeTwo() {
         try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
@@ -402,6 +402,34 @@ public class Sorts {
             users.sort(Comparator.comparingInt((User u) -> u.age).thenComparing(u -> u.name));
 
             users.forEach(System.out::println);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * Sort age and name 3.
+     */
+    public static void sortAgeAndName3() {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
+            int count = Integer.parseInt(br.readLine());
+
+            List<String[]> users = new ArrayList<>();
+            for (int i = 0; i < count; i++) {
+                String[] input = br.readLine().split(" ");
+                users.add(input);
+            }
+
+            /* 나이로 정렬, 나이가 같으면 이름으로 정렬 */
+            users.sort((u1, u2) -> {
+                int ageComparison = Integer.parseInt(u1[0]) - Integer.parseInt(u2[0]);
+                if (ageComparison != 0) {
+                    return ageComparison;
+                }
+                return u1[1].compareTo(u2[1]);
+            });
+
+            users.forEach(user -> System.out.println(user[0] + " " + user[1]));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
