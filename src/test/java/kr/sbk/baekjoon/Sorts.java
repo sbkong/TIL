@@ -7,7 +7,9 @@ import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -124,7 +126,7 @@ public class Sorts {
      * <a href="https://www.acmicpc.net/board/view/31887">...</a>
      *<a href="https://codeforces.com/blog/entry/7108">...</a>
      *
-     * @param <ex>   the type parameter
+     * @param <ex>    the type parameter
      */
     public static <ex> void sortSmallToLargeTwo() {
         try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
@@ -221,6 +223,83 @@ public class Sorts {
             points.forEach(p -> System.out.println(p[0] + " " + p[1]));
         } catch (Exception e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * Sort o log n 2.
+     */
+    public static void sortOLogN2() {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
+            int count = Integer.parseInt(br.readLine());
+
+            List<int[]> points = new ArrayList<>();
+            for (int i = 0; i < count; i++) {
+                String[] input = br.readLine().split(" ");
+                points.add(new int[]{Integer.parseInt(input[0]), Integer.parseInt(input[1])});
+            }
+
+            points.sort((a, b) -> {
+                if (b[1] != a[1]) {
+                    return Integer.compare(a[1], b[1]);
+                } else {
+                    if (b[0] != a[0]) {
+                        return Integer.compare(a[0], b[0]);
+                    }
+                }
+                return 0;
+            });
+
+            points.forEach(p -> System.out.println(p[0] + " " + p[1]));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+    /**
+     * Sort word.
+     */
+    public static void sortWord() {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
+            int count = Integer.parseInt(br.readLine());
+
+            Set<String> inputWords = new HashSet<>();
+            for (int i = 0; i < count; i++) {
+                String input = br.readLine();
+                if (!isNumeric(input)) {
+                    inputWords.add(input);
+                }
+            }
+
+            List<String> distinctWords = new ArrayList<>(inputWords);
+
+            distinctWords.sort((o1, o2) -> {
+                return o1.compareTo(o2);
+            });
+
+            distinctWords.sort((o1, o2) -> {
+                return o1.length() - o2.length();
+            });
+
+            distinctWords.forEach(System.out::println);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * <a href="https://www.acmicpc.net/problem/1181">...</a>
+     *
+     * @param str the str
+     * @return the boolean
+     */
+    public static boolean isNumeric(String str) {
+        try {
+            Double.parseDouble(str);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
         }
     }
 }
