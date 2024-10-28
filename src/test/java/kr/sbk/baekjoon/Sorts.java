@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -128,7 +129,7 @@ public class Sorts {
      * <a href="https://www.acmicpc.net/board/view/31887">...</a>
      *<a href="https://codeforces.com/blog/entry/7108">...</a>
      *
-     * @param <ex>       the type parameter
+     * @param <ex>        the type parameter
      */
     public static <ex> void sortSmallToLargeTwo() {
         try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
@@ -430,6 +431,41 @@ public class Sorts {
             });
 
             users.forEach(user -> System.out.println(user[0] + " " + user[1]));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * <a href="https://www.acmicpc.net/problem/18870">...</a>
+     * 좌표를 인덱싱해서 표현하는 문제
+     * 입력좌표가 2 4 -10 4 -9 이면,
+     * 1. 중복제거 및 정렬 : -10 -9 2 4
+     * 2. 인덱싱 : 0 1 2 3
+     * 3. 입력 좌표 순서대로 인덱싱된 좌표를 출력
+     */
+    public static void compressCoordinate() {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
+            int count = Integer.parseInt(br.readLine());
+
+            List<Integer> coordinate = Arrays.stream(br.readLine().split(" ")).map(Integer::parseInt).collect(Collectors.toList());
+
+            Set<Integer> set = new HashSet<>(coordinate);
+            List<Integer> distinctCoordinate = new ArrayList<>(set);
+
+            distinctCoordinate.sort(Integer::compareTo);
+
+            Map<Integer, Integer> compressedCoordinate = new HashMap<>();
+            for (int i = 0; i < distinctCoordinate.size(); i++) {
+                compressedCoordinate.put(distinctCoordinate.get(i), i);
+            }
+
+            StringBuilder result = new StringBuilder();
+            for (int value : coordinate) {
+                result.append(compressedCoordinate.get(value)).append(" ");
+            }
+            System.out.println(result.toString().trim());
+
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
