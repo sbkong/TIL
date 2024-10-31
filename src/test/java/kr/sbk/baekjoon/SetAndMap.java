@@ -43,4 +43,53 @@ public class SetAndMap {
         }
     }
 
+    /**
+     * <a href="https://www.acmicpc.net/problem/14425">...</a>
+     */
+    public static void containsString() {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
+            String[] input = br.readLine().split(" ");
+            int referenceCount = Integer.parseInt(input[0]);
+            int differenceCount = Integer.parseInt(input[1]);
+
+            Set<String> referenceSet = new HashSet<>();
+//            Map<String, Integer> differenceMap = new HashMap<>();
+
+            for (int i = 0; i < referenceCount; i++) {
+                referenceSet.add(br.readLine());
+            }
+//            for (int i = 0; i < differenceCount; i++) {
+//                differenceMap.put(br.readLine(), 1);
+//            }
+
+            /* 람다식 적용 */
+//            Set<String> referenceSet = IntStream.range(0, referenceCount)
+//                .mapToObj(i -> br.readLine())
+//                .collect(Collectors.toSet());
+//
+//            Map<String, Integer> differenceMap = IntStream.range(0, differenceCount)
+//                .mapToObj(i -> {
+//                    try {
+//                        return br.readLine();
+//                    } catch (IOException e) {
+//                        throw new RuntimeException(e);
+//                    }
+//                })
+//                .collect(Collectors.toMap(key -> key, value -> 1));
+//
+
+            int matchCount = 0;
+            for (int i = 0; i < differenceCount; i++) {
+                String word = br.readLine();
+                if (referenceSet.contains(word)) {
+                    matchCount++;
+                }
+            }
+
+            System.out.println(matchCount);
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
