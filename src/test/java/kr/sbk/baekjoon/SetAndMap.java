@@ -3,8 +3,11 @@ package kr.sbk.baekjoon;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 
 /**
  * The type Set and map.
@@ -87,6 +90,36 @@ public class SetAndMap {
             }
 
             System.out.println(matchCount);
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+    /**
+     * <a href="https://www.acmicpc.net/problem/7785">...</a>
+     *
+     *
+     */
+    public static void remainderPerson() {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
+            int logCount = Integer.parseInt(br.readLine());
+
+            Map<String, String> entryState = new TreeMap<String, String>(Comparator.reverseOrder());
+
+            for (int i = 0; i < logCount; i++) {
+                String[] inputs = br.readLine().split(" ");
+
+                entryState.remove(inputs[0]);
+                entryState.put(inputs[0], inputs[1]);
+            }
+
+            entryState.forEach((member, state) -> {
+                if ("enter".equals(state)) {
+                    System.out.println(member);
+                }
+            });
 
         } catch (Exception e) {
             throw new RuntimeException(e);
