@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -120,6 +121,41 @@ public class SetAndMap {
                     System.out.println(member);
                 }
             });
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+    /**
+     * <a href="https://www.acmicpc.net/problem/1620">...</a>
+     */
+    public static void findPokemon() {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
+            String[] logCount = br.readLine().split(" ");
+            int listCount = Integer.parseInt(logCount[0]);
+            int questionCount = Integer.parseInt(logCount[1]);
+
+            Map<Integer, String> pokemonList = new HashMap<>();
+            Map<String, Integer> pokemonIndex = new HashMap<>();
+
+            for (int i = 0; i < listCount; i++) {
+                String pokemonName = br.readLine();
+                pokemonList.put(i, pokemonName);
+                pokemonIndex.put(pokemonName, i);
+            }
+
+            for (int i = 0; i < questionCount; i++) {
+                String question = br.readLine();
+
+                if (question.matches("-?\\d+")) {
+                    int index = Integer.parseInt(question);
+                    System.out.println(pokemonList.get(index - 1));
+                } else {
+                    System.out.println(pokemonIndex.get(question) + 1);
+                }
+            }
 
         } catch (Exception e) {
             throw new RuntimeException(e);
