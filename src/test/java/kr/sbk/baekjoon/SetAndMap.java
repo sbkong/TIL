@@ -161,4 +161,69 @@ public class SetAndMap {
             throw new RuntimeException(e);
         }
     }
+
+    /**
+     * <a href="https://www.acmicpc.net/problem/10816">...</a>
+     */
+//시간 초과
+    public static void findGetCardCount() {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
+
+            int n = Integer.parseInt(br.readLine());
+
+            int[] haveCards = Arrays.stream(br.readLine().split(" ")).mapToInt(Integer::parseInt)
+                .toArray();
+
+            int m = Integer.parseInt(br.readLine());
+
+            int[] findCards = Arrays.stream(br.readLine().split(" ")).mapToInt(Integer::parseInt)
+                .toArray();
+
+            for (int i = 0; i < findCards.length; i++) {
+                int finalI = i;
+                System.out.print(
+                    Arrays.stream(haveCards).filter(c -> c == findCards[finalI]).count() + " ");
+            }
+
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * 입력하면서 카드 번호에 대한 개수를 세고 Map에 넣어놓음.
+     */
+    public static void findGetCardCount2() {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
+
+            int n = Integer.parseInt(br.readLine());
+
+            int[] haveCards = Arrays.stream(br.readLine().split(" ")).mapToInt(Integer::parseInt)
+                .toArray();
+
+            int m = Integer.parseInt(br.readLine());
+
+            int[] findCards = Arrays.stream(br.readLine().split(" ")).mapToInt(Integer::parseInt)
+                .toArray();
+
+            // Use a HashMap to store the count of each card in `haveCards`
+            Map<Integer, Integer> cardCountMap = new HashMap<>();
+            for (int card : haveCards) {
+                cardCountMap.put(card, cardCountMap.getOrDefault(card, 0) + 1);
+            }
+
+            // For each card in `findCards`, retrieve the count from the HashMap
+            StringBuilder result = new StringBuilder();
+            for (int card : findCards) {
+                result.append(cardCountMap.getOrDefault(card, 0)).append(" ");
+            }
+
+            // Print all counts at once
+            System.out.println(result.toString().trim());
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
