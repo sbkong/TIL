@@ -9,6 +9,8 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
+import java.util.TreeSet;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * The type Set and map.
@@ -221,6 +223,45 @@ public class SetAndMap {
 
             // Print all counts at once
             System.out.println(result.toString().trim());
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * <a href="https://www.acmicpc.net/problem/1764">...</a>
+     */
+    public static void findPerson() {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
+
+            String[] input = br.readLine().split(" ");
+            int n = Integer.parseInt(input[0]);
+            int m = Integer.parseInt(input[1]);
+
+            Set<String> nameNeverHaveHeard = new TreeSet<>();
+            Set<String> nameNeverHaveSaw = new TreeSet<>();
+
+            for (int i = 0; i < n; i++) {
+                String name = br.readLine();
+                nameNeverHaveHeard.add(name);
+            }
+            for (int i = 0; i < m; i++) {
+                String name = br.readLine();
+                nameNeverHaveSaw.add(name);
+            }
+
+            AtomicInteger count = new AtomicInteger();
+            StringBuilder result = new StringBuilder();
+
+            nameNeverHaveSaw.forEach(name -> {
+                if (nameNeverHaveHeard.contains(name)) {
+                    count.getAndIncrement();
+                    result.append(name).append("\n");
+                }
+            });
+
+            System.out.println(count + "\n" + result);
 
         } catch (Exception e) {
             throw new RuntimeException(e);
