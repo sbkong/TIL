@@ -11,6 +11,7 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 /**
  * The type Set and map.
@@ -262,6 +263,45 @@ public class SetAndMap {
             });
 
             System.out.println(count + "\n" + result);
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * <a href="https://www.acmicpc.net/problem/1269">...</a>
+     */
+    public static void groupCount() {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
+
+            String[] input = br.readLine().split(" ");
+
+            Set<Integer> groupA = new TreeSet<>();
+            Set<Integer> groupB = new TreeSet<>();
+
+            Arrays.stream(Arrays.stream(br.readLine().split(" ")).mapToInt(Integer::parseInt).toArray()).mapToObj(
+                groupA::add).collect(Collectors.toList());
+
+            Arrays.stream(Arrays.stream(br.readLine().split(" ")).mapToInt(Integer::parseInt).toArray()).mapToObj(
+                groupB::add).collect(Collectors.toList());
+
+            AtomicInteger countA = new AtomicInteger();
+            AtomicInteger countB = new AtomicInteger();
+
+            groupB.forEach(name -> {
+                if (groupA.contains(name)) {
+                    countA.getAndIncrement();
+                }
+            });
+
+            groupA.forEach(name -> {
+                if (groupB.contains(name)) {
+                    countB.getAndIncrement();
+                }
+            });
+
+            System.out.println( (groupA.size() - countA.get() ) + (groupB.size() - countB.get()) );
 
         } catch (Exception e) {
             throw new RuntimeException(e);
