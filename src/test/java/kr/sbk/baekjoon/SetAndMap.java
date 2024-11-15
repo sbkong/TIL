@@ -307,4 +307,37 @@ public class SetAndMap {
             throw new RuntimeException(e);
         }
     }
+
+    /**
+     * <a href="https://www.acmicpc.net/problem/11478">...</a>
+     */
+    public static void getDifferentWordCount() {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
+
+            String input = br.readLine();
+            int len = input.length() + 1;
+
+            Set<String> possibleWords = new HashSet<>();
+
+//            for (int i = 1; i < len; i++) {
+//                for (int j = 0; j <= i; j++) {
+//                    String word = input.substring(j, i);
+//                    possibleWords.add(word);
+//                }
+//            }
+//            possibleWords.remove("");
+
+            for (int i = 0; i < input.length(); i++) {
+                for (int j = i + 1; j <= input.length(); j++) {
+                    possibleWords.add(input.substring(i, j));
+                }
+            }
+
+            System.out.println(possibleWords.size());
+//            possibleWords.forEach(System.out::println);
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
