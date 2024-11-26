@@ -2,6 +2,7 @@ package kr.sbk.baekjoon;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Set;
 import java.util.TreeSet;
@@ -51,6 +52,32 @@ public class GcdAndLcm {
                 System.out.println( ( numbers[0] * numbers[1]) / lcm.get() );
 
             }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static void findLcd() {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
+
+            long[] input = Arrays.stream(br.readLine().split(" ")).mapToLong(Long::parseLong)
+                .toArray();
+
+            input = Arrays.stream(input).sorted().toArray();
+
+            long n = input[0];
+            long m = input[1];
+
+            /* 최대 공약수 */
+            while (n != 0) {
+                long temp = n;
+                n = m % n;
+                m = temp;
+            }
+
+            /* 최소 공배수 */
+            System.out.println((input[1] * input[0]) / m);
+
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
