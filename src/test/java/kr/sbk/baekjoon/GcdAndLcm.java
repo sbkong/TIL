@@ -57,6 +57,9 @@ public class GcdAndLcm {
         }
     }
 
+    /**
+     * Find lcd.
+     */
     public static void findLcd() {
         try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
 
@@ -77,6 +80,35 @@ public class GcdAndLcm {
 
             /* 최소 공배수 */
             System.out.println((input[1] * input[0]) / m);
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * Sum fraction.
+     */
+    public static void sumFraction() {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
+
+            int[] a = Arrays.stream(br.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
+            int[] b = Arrays.stream(br.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
+
+            int denominator = a[1] * b[1];
+            int numerator = (b[1] * a[0]) + (a[1] * b[0]);
+
+            int n = numerator;
+            int m = denominator;
+
+            while (n != 0) {
+                int temp = n;
+                n = m % n;
+                m = temp;
+            }
+
+            System.out.println((numerator/m) + " " + (denominator/m));
+
 
         } catch (Exception e) {
             throw new RuntimeException(e);
