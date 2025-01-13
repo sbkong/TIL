@@ -49,7 +49,7 @@ public class GcdAndLcm {
                     .findFirst()
                     .ifPresent(lcm::set);
 
-                System.out.println( ( numbers[0] * numbers[1]) / lcm.get() );
+                System.out.println((numbers[0] * numbers[1]) / lcm.get());
 
             }
         } catch (Exception e) {
@@ -107,11 +107,94 @@ public class GcdAndLcm {
                 m = temp;
             }
 
-            System.out.println((numerator/m) + " " + (denominator/m));
+            System.out.println((numerator / m) + " " + (denominator / m));
 
 
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    /**
+     * Planting trees.
+     * 핵심은 입력 크기가 최대 100,000이며, 각 가로수 위치는* 10^9 까지 주어질 수 있기 때문에 O(n \log \text{maxGap}) 복잡도 내에서 문제를 해결해야 한다는 점
+     *
+     * 최대 공약수 계산:
+     * 각 간격에 대해 한 번씩만 GCD를 계산합니다. 이 과정은
+     * 𝑂(𝑛log maxGap)
+     *
+     * 추가 나무 계산:
+     * 첫 번째와 마지막 위치 사이에서 gcd 간격으로 가로수를 배치했을 때 필요한 개수를 O(1)로 계산
+     *
+     * 1. **간격 계산과 GCD**:
+     *    - 모든 간격을 순회하며 GCD를 계산. \(O(n \log \text{maxGap})\).
+     *
+     * 2. **추가 나무 계산 최적화**:
+     *    - 가로수의 총 간격을 \(gcd\)로 나눈 값에서 이미 심어진 가로수의 간격을 제외. 이 과정은 \(O(1)\)입니다.
+     *
+     * ### 시간 복잡도
+     * 1. GCD 계산: \(O(n \log \text{maxGap})\).
+     * 2. 필요한 나무 계산: \(O(1)\).
+     * 3. 입력 처리: \(O(n)\).
+     *
+     * ### 공간 복잡도
+     * - 배열 크기는 \(O(n)\), 추가 메모리는 상수 수준.
+     */
+    public static void plantingTrees() {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
+
+            int n = Integer.parseInt(br.readLine());
+
+            /*List<Integer> plantingPoints = new ArrayList<>();
+            for (int i = 0; i < n; i++) {
+                plantingPoints.add(Integer.parseInt(br.readLine()));
+            }
+
+            int gcd = plantingPoints.get(1) - plantingPoints.get(0);
+            for (int i = 2; i < n; i++) {
+                gcd = getGCD(gcd, plantingPoints.get(i) - plantingPoints.get(i - 1));
+            }
+
+            int needPlantingTreeCount = 0;
+            int first = plantingPoints.get(0);
+            int last = plantingPoints.get(n - 1);
+
+            for (int i = first + gcd; i < last; i += gcd) {
+                if (!plantingPoints.contains(i)) {
+                    needPlantingTreeCount++;
+                }
+            }*/
+
+//
+
+            int[] plantingPoints = new int[n];
+
+            for (int i = 0; i < n; i++) {
+                plantingPoints[i] = Integer.parseInt(br.readLine());
+            }
+
+            int gcd = plantingPoints[1] - plantingPoints[0];
+            for (int i = 2; i < n; i++) {
+                gcd = getGCD(gcd, plantingPoints[i] - plantingPoints[i - 1]);
+            }
+
+            int totalGaps = (plantingPoints[n - 1] - plantingPoints[0]) / gcd;
+            int needPlantingTreeCount = totalGaps - (n - 1);
+
+//
+            System.out.println(needPlantingTreeCount);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    // 최대공약수 계산 함수 (유클리드 알고리즘)
+    private static int getGCD(int a, int b) {
+        while (b != 0) {
+            int temp = b;
+            b = a % b;
+            a = temp;
+        }
+        return a;
     }
 }
