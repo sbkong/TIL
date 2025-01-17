@@ -197,4 +197,48 @@ public class GcdAndLcm {
         }
         return a;
     }
+
+
+    /**
+     * Find prime number.
+     */
+    public static void findPrimeNumber() {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
+
+            int n = Integer.parseInt(br.readLine());
+
+            for (int i = 0; i < n; i++) {
+                long number = Long.parseLong(br.readLine());
+
+                // 입력 숫자와 같거나 큰 첫 번째 소수 찾기
+                long primeNumber = findNextPrime(number);
+
+                System.out.println(primeNumber);
+            }
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private static boolean isPrime(long num) {
+        if (num < 2) {
+            return false;
+        }
+        for (long i = 2; i <= Math.sqrt(num); i++) {
+            if (num % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private static long findNextPrime(long number) {
+        while (true) {
+            if (isPrime(number)) {
+                return number;
+            }
+            number++;
+        }
+    }
 }
