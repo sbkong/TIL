@@ -241,4 +241,81 @@ public class GcdAndLcm {
             number++;
         }
     }
+
+    /**
+     * 숫자 범위에서 소수 찾기
+     * <a href="https://www.acmicpc.net/problem/1929">...</a>
+     */
+    public static void findAllPrimeNumber() {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
+
+            int[] inputs = Arrays.stream(br.readLine().split(" ")).mapToInt(Integer::parseInt)
+                .toArray();
+
+            for (int i = inputs[0]; i <= inputs[1]; i++) {
+                if (isPrime(i)) {
+                    System.out.println(i);
+                }
+            }
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private static boolean isPrime(int num) {
+        if (num < 2) {
+            return false;
+        }
+        for (int i = 2; i <= Math.sqrt(num); i++) {
+            if (num % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * 에라토스테네스의 체 활용
+     *
+     * 2부터 시작하여 해당 숫자의 배수를 모두 지웁니다.
+     * 다음 남아 있는 수(지워지지 않은 수)로 넘어가서 그 수의 배수를 지웁니다.
+     * 이 과정을 rootN 까지 반복하면 남아 있는 모든 수는 소수입니다.
+     */
+    public static void findAllPrimeNumbers() {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
+
+            int[] inputs = Arrays.stream(br.readLine().split(" "))
+                .mapToInt(Integer::parseInt)
+                .toArray();
+
+            int start = inputs[0];
+            int end = inputs[1];
+
+            boolean[] isPrime = new boolean[end + 1];
+            Arrays.fill(isPrime, true);  // 모든 수를 처음에 소수로 가정
+
+            isPrime[0] = false;  // 0은 소수가 아님
+            isPrime[1] = false;  // 1도 소수가 아님
+
+            // 에라토스테네스의 체 알고리즘
+            for (int i = 2; i * i <= end; i++) {
+                if (isPrime[i]) {
+                    for (int j = i * i; j <= end; j += i) {
+                        isPrime[j] = false;  // i의 배수는 소수가 아님
+                    }
+                }
+            }
+
+            // 결과 출력
+            for (int i = start; i <= end; i++) {
+                if (isPrime[i]) {
+                    System.out.println(i);  // 소수인 경우만 출력
+                }
+            }
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
