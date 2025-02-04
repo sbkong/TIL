@@ -318,4 +318,32 @@ public class GcdAndLcm {
             throw new RuntimeException(e);
         }
     }
+
+    /**
+     * 베르트랑 공준; 임의의 자연수 n에 대하여, n보다 크고, 2n보다 작거나 같은 소수는 적어도 하나 존재한다
+     * <a href="https://www.acmicpc.net/problem/4948">...</a>
+     */
+    public static void findPrimeNumberCount() {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
+
+            while (true) {
+                int n = Integer.parseInt(br.readLine());
+
+                if (n == 0) {
+                    break;
+                }
+
+                int count = 0;
+                for (int i = n + 1; i <= n * 2; i++) {
+                    if (isPrime(i)) {
+                        count++;
+                    }
+                }
+                System.out.println(count);
+            }
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
