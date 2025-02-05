@@ -2,8 +2,10 @@ package kr.sbk.baekjoon;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -345,5 +347,100 @@ public class GcdAndLcm {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    /**
+     * Goldbach partition.
+     */
+    public static void goldbachPartition() {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
+
+            int t = Integer.parseInt(br.readLine());
+
+            for (int i = 0; i < t; i++) {
+                int n = Integer.parseInt(br.readLine());
+
+                List<Integer> primes = getPrimes(n);
+
+                int count = proofHypothesis(n, primes);
+
+                System.out.println(count);
+            }
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private static int proofHypothesis(int n, List<Integer> primes) {
+        int count = 0;
+        for (int i = 0; i < primes.size(); i++) {
+            for (int j = primes.size() - 1; j >= i; j--) {
+                if (primes.get(j) + primes.get(i) == n) {
+                    count++;
+                }
+            }
+        }
+
+        return count;
+    }
+
+    private static List<Integer> getPrimes(int n) {
+        List<Integer> primes = new ArrayList<>();
+
+        for (int i = 2; i < n; i++) {
+            if (isPrime(i)) {
+                primes.add(i);
+            }
+        }
+        return primes;
+    }
+
+    /**
+     * Goldbach partition 2. 에라토스테네스의 체 사용
+     */
+    public static void goldbachPartition2() {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
+
+            int t = Integer.parseInt(br.readLine());
+
+            for (int i = 0; i < t; i++) {
+                int n = Integer.parseInt(br.readLine());
+
+                boolean[] isPrime = sieveOfEratosthenes(n);
+                int count = proofHypothesis(n, isPrime);
+
+                System.out.println(count);
+            }
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private static int proofHypothesis(int n, boolean[] isPrime) {
+        int count = 0;
+        for (int i = 2; i <= n / 2; i++) {
+            if (isPrime[i] && isPrime[n - i]) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    private static boolean[] sieveOfEratosthenes(int n) {
+        boolean[] isPrime = new boolean[n + 1];
+        for (int i = 2; i <= n; i++) {
+            isPrime[i] = true;
+        }
+
+        for (int i = 2; i * i <= n; i++) {
+            if (isPrime[i]) {
+                for (int j = i * i; j <= n; j += i) {
+                    isPrime[j] = false;
+                }
+            }
+        }
+        return isPrime;
     }
 }
